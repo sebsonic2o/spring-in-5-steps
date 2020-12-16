@@ -4,7 +4,9 @@ public class BinarySearchImpl {
 
 	public int binarySearch(int[] numbers, int numberToSearchFor) {
 		// Sorting
+		BubbleSortAlgorithm bubbleSort = new BubbleSortAlgorithm();
+		int[] sortedNumbers = bubbleSort.sort(numbers);
 		// Searching
-		return 3;
+		return 0;
 	}
 }
