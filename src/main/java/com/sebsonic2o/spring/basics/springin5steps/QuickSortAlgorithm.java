@@ -1,9 +1,9 @@
 package com.sebsonic2o.spring.basics.springin5steps;
 
-public class BubbleSortAlgorithm implements SortAlgorithm {
+public class QuickSortAlgorithm implements SortAlgorithm {
 
 	public int[] sort(int[] numbers) {
-		// bubble sort
+		// quick sort
 		return numbers;
 	}
 }
