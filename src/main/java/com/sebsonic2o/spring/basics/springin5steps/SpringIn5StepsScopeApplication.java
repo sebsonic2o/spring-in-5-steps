@@ -2,13 +2,14 @@ package com.sebsonic2o.spring.basics.springin5steps;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import com.sebsonic2o.spring.basics.springin5steps.scope.PersonDAO;
 
-@SpringBootApplication
+@Configuration
+@ComponentScan
 public class SpringIn5StepsScopeApplication {
 
 	private static Logger LOGGER =
@@ -16,16 +17,17 @@ public class SpringIn5StepsScopeApplication {
 
 	public static void main(String[] args) {
 		// Get bean from application context
-		ConfigurableApplicationContext applicationContext =
-				SpringApplication.run(SpringIn5StepsScopeApplication.class, args);
+		try(AnnotationConfigApplicationContext applicationContext =
+				new AnnotationConfigApplicationContext(SpringIn5StepsScopeApplication.class)) {
 
-		PersonDAO personDAO = applicationContext.getBean(PersonDAO.class);
-		LOGGER.info("{}", personDAO);
-		LOGGER.info("{}", personDAO.getJdbcConnection());
-		LOGGER.info("{}", personDAO.getJdbcConnection()); // new connection instance
+			PersonDAO personDAO = applicationContext.getBean(PersonDAO.class);
+			LOGGER.info("{}", personDAO);
+			LOGGER.info("{}", personDAO.getJdbcConnection());
+			LOGGER.info("{}", personDAO.getJdbcConnection()); // new connection instance
 
-		PersonDAO newPersonDAO = applicationContext.getBean(PersonDAO.class);
-		LOGGER.info("{}", newPersonDAO);
-		LOGGER.info("{}", newPersonDAO.getJdbcConnection()); // new connection instance
+			PersonDAO newPersonDAO = applicationContext.getBean(PersonDAO.class);
+			LOGGER.info("{}", newPersonDAO);
+			LOGGER.info("{}", newPersonDAO.getJdbcConnection()); // new connection instance
+		}
 	}
 }

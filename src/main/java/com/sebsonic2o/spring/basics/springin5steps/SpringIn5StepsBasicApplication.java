@@ -1,12 +1,13 @@
 package com.sebsonic2o.spring.basics.springin5steps;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import com.sebsonic2o.spring.basics.springin5steps.basic.BinarySearchImpl;
 
-@SpringBootApplication
+@Configuration
+@ComponentScan
 public class SpringIn5StepsBasicApplication {
 
 	// What are the beans? => @Component
@@ -15,15 +16,16 @@ public class SpringIn5StepsBasicApplication {
 
 	public static void main(String[] args) {
 		// Get bean from application context
-		ConfigurableApplicationContext applicationContext =
-				SpringApplication.run(SpringIn5StepsBasicApplication.class, args);
+		try(AnnotationConfigApplicationContext applicationContext =
+				new AnnotationConfigApplicationContext(SpringIn5StepsBasicApplication.class)) {
 
-		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
-		int result = binarySearch.binarySearch(new int[] {12, 4, 6}, 4);
-		System.out.println(result);
+			BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
+			int result = binarySearch.binarySearch(new int[] {12, 4, 6}, 4);
+			System.out.println(result);
 
-		BinarySearchImpl newBinarySearch = applicationContext.getBean(BinarySearchImpl.class);
-		int newResult = newBinarySearch.binarySearch(new int[] {12, 4, 6}, 4);
-		System.out.println(newResult);
+			BinarySearchImpl newBinarySearch = applicationContext.getBean(BinarySearchImpl.class);
+			int newResult = newBinarySearch.binarySearch(new int[] {12, 4, 6}, 4);
+			System.out.println(newResult);
+		}
 	}
 }
