@@ -22,9 +22,10 @@ public class SpringIn5StepsScopeApplication {
 		PersonDAO personDAO = applicationContext.getBean(PersonDAO.class);
 		LOGGER.info("{}", personDAO);
 		LOGGER.info("{}", personDAO.getJdbcConnection());
+		LOGGER.info("{}", personDAO.getJdbcConnection()); // new connection instance
 
 		PersonDAO newPersonDAO = applicationContext.getBean(PersonDAO.class);
 		LOGGER.info("{}", newPersonDAO);
-		LOGGER.info("{}", newPersonDAO.getJdbcConnection());
+		LOGGER.info("{}", newPersonDAO.getJdbcConnection()); // new connection instance
 	}
 }
