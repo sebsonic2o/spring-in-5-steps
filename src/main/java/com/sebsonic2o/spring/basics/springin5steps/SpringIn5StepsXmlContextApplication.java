@@ -16,6 +16,8 @@ public class SpringIn5StepsXmlContextApplication {
 		try(ClassPathXmlApplicationContext applicationContext =
 				new ClassPathXmlApplicationContext("applicationContext.xml")) {
 
+			LOGGER.info("Loaded beans - {}", (Object)applicationContext.getBeanDefinitionNames());
+
 			XmlPersonDAO personDAO = applicationContext.getBean(XmlPersonDAO.class);
 			LOGGER.info("{} connection-{}", personDAO, personDAO.getXmlJdbcConnection());
 		}
